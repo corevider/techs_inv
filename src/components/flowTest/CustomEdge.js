@@ -1,5 +1,4 @@
 import React from 'react';
-import { getBezierPath } from 'reactflow';
 
 export default function CustomEdge({
   id,
@@ -20,7 +19,13 @@ export default function CustomEdge({
         stroke="#222"
         strokeWidth={1.5}
         className="animated"
-        d={`M${sourceX},${sourceY} L ${sourceX} ${targetY} L ${sourceX} ${targetY} L ${targetX},${targetY}`}
+        d={`
+        M${sourceX},${sourceY} 
+        L ${(sourceX>targetX)? ((sourceX-200<targetX-50)?sourceX-200 : targetX-50) : ((sourcePosition)=='right'?sourceX+50:sourceX-20)} ${sourceY}
+        L ${(sourceX>targetX)? ((sourceX-200<targetX-50)?sourceX-200 : targetX-50)  : ((sourcePosition)=='right'?sourceX+50:sourceX-20)} ${targetY} 
+        L ${(sourceX>targetX)? ((sourceX-200<targetX-50)?sourceX-200 : targetX-50)  : ((sourcePosition)=='right'?sourceX+50:sourceX-20)} ${targetY} 
+        L ${targetX},${targetY}
+        `}
       />
       <circle cx={targetX} cy={targetY} fill="#fff" r={3} stroke="#222" strokeWidth={1.5} />
     </g>
